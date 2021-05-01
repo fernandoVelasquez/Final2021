@@ -133,19 +133,125 @@ $H_A$ The alternative hypothesis states that their is a difference in infection 
 
 We reject the null hypothesis as the vaccine is 67% effective on females.  
 
+# LGBTQ
+
+```{r}
+LGBTQdata<- filter(FinalData,LGBTQ=="gay")
+LGBTQdata$LGBTQ<- as.factor(LGBTQdata$LGBTQ)
+LGBTQdata$infected=factor(LGBTQdata$infected)
+LGBTQdata$infected <- relevel(LGBTQdata$infected, "OK")
+```
+
+
+
+## Bar Charts
+
+```{r}
+
+LGBTQ <- LGBTQdata %>% group_by(infected, treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(LGBTQ,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(LGBTQ,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+From what we can determined from the bar chart out of 116 people who contracted covid about 70% were given the Covid vaccine. We can conclude that the vaccine may not be effective for LGBTQ community. 
+
+## Numerical Summary
+
+```{r}
+table3 <- xtabs(~infected + treatment, data=LGBTQdata)
+rowPerc(table3)
+colPerc(table3)
+print(table3)
+```
+  
+From the table, we can see that 116 LGBTQ members were infected with covid which 70% were given the vaccine. Compared to the 30% who received the placebo. 
+
+## Inferential Results
+
+```{r}
+chisq.test(table3)
+chisqtestGC(table3)
+fisher.test(table3)
+```
+From the Chi-squared table we can see that the p value is so small that is unlikely that it occur by chance.  
+
+$H_0$ The null hypothesis explains that the vaccine has no effect in infection rate on LGBTQ who took the vaccine.  
+$H_A$ The alternative hypothesis states that their is a difference in infection rate if a LGBTQ decides to take the vaccine.  
+
+The vaccine is 29% effective on the LGBTQ community.  
+
+
 
 
 
 # Drug Users
 
+```{r}
+Druggiedata<- filter(FinalData,DrugUser=="yes")
+Druggiedata$DrugUser<- as.factor(Druggiedata$DrugUser)
+Druggiedata$infected=factor(Druggiedata$infected)
+Druggiedata$infected <- relevel(Druggiedata$infected, "OK")
+```
 
 
+## Bar Charts
+
+```{r}
+
+Druggies <- Druggiedata %>% group_by(infected, treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(Druggies,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(Druggies,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+  
+From the Bar Chart approximately we see 117 infected drug users which 32% were given the vaccine.  
 
 
+## Numerical Summary
 
-# Drug Users
+```{r}
+table4 <- xtabs(~infected + treatment, data=Druggiedata)
+rowPerc(table4)
+colPerc(table4)
+print(table4)
+```
+  
+From the table we can see 117 out of 2,280 were infected with covid which 33.3% were given the vaccine and the other 66% were given the placebo. The drug users who were vaccinated were 60% less likely to be sick from covid.  
 
 
+## Inferential Results
+
+```{r}
+chisq.test(table4)
+chisqtestGC(table4)
+fisher.test(table4)
+```
+From the Chi Squared table we can see that the p value is so small that the results are highly unlikely to occur by chance.  
+
+$H_0$ The null hypothesis explains that the vaccine has no effect in infection rate on Drug users who took the vaccine.  
+$H_A$ The alternative hypothesis states that their is a difference in infection rate if a Drug users decides to take the vaccine.  
+
+We can determine that the vaccine has a 60% effectiveness in Drug users.  
+
+
+# Discussion and Conclusion 
+
+From what we can conclude from looking at 4 different sub-population we can determine that the group with the highest effectiveness treatment/vaccine were the Females with a 67% of effectiveness. Drug users were the second group who reacted well to the vaccine as the vaccine was 60% effective. While the Males and LGBTQ sub population responded poorly to the vaccine as males had a 40% effective rate and LGBTQ community had a 29% effectiveness.  
 
 
 
