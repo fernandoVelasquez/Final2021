@@ -77,15 +77,68 @@ From what we can gather from the Chi Squared table the p value is 0.0006181 whic
 From the Fisher Exact test we can determined that the vaccine is about 60% effective while the 40% was ineffective.    
 
 $H_0$ The null hypothesis explains that the vaccine does not make a difference on infection rate if a male decides to take the vaccine.  
-$H_0$ The alternative hypothesis states that their is a difference in infection rate if a male decides to take the vaccine.     
+$H_A$ The alternative hypothesis states that their is a difference in infection rate if a male decides to take the vaccine.     
 
 # Females
 
+```{r}
+Femaledata<- filter(FinalData,sex=="gal")
+Femaledata$sex<- as.factor(Femaledata$sex)
+Femaledata$infected=factor(Femaledata$infected)
+Femaledata$infected <- relevel(Femaledata$infected, "OK")
+levels(Femaledata$infected)
+```
+
+## Bar Chart
+
+```{r}
+
+Females <- Femaledata %>% group_by(infected, treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(Females,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(Females,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+  
+The Bar Chart shows that approximately out of 607 females infected with covid-91, 32% were given the vaccine and 66% were given the placebo. The Vaccine may be effective on females.
+
+
+
+## Numerical Summary
+```{r}
+table2 <- xtabs(~infected + treatment, data=Femaledata)
+rowPerc(table2)
+colPerc(table2)
+print(table2)
+```
+From the table we can see that out of 9,200 females, 607 were infected with covid. Out of those 607 females 4.44% of were given the vaccine and 8.67% were given the placebo. We can conclude that treatment is effective in females.  
+
+## Inferential Results
+
+```{r}
+chisq.test(table2)
+chisqtestGC(table2)
+fisher.test(table2)
+```
+The Chi Squared table show us that the p value is so small it scour by chance.  
+
+$H_0$ The null hypothesis explains that the vaccine has no effect in infection rate on females who took the vaccine.  
+$H_A$ The alternative hypothesis states that their is a difference in infection rate if a male decides to take the vaccine.  
+
+We reject the null hypothesis as the vaccine is 67% effective on females.  
 
 
 
 
-# LGQBT
+# Drug Users
+
+
 
 
 
