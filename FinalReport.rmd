@@ -251,7 +251,7 @@ We can determine that the vaccine has a 60% effectiveness in Drug users.
 
 # Discussion and Conclusion 
 
-From what we can conclude from looking at 4 different sub-population we can determine that the group with the highest effectiveness treatment/vaccine were the Females with a 67% of effectiveness. Drug users were the second group who reacted well to the vaccine as the vaccine was 60% effective. While the Males and LGBTQ sub population responded poorly to the vaccine as males had a 40% effective rate and LGBTQ community had a 29% effectiveness.  
+From what we can conclude from looking at 4 different sub-population we can determine that the group with the highest effectiveness treatment/vaccine were the Females with a 67% of effectiveness. Drug users were the second group who reacted well to the vaccine as the vaccine was 60% effective. While the Males and LGBTQ sub population responded poorly to the vaccine as males had a 40% effective rate and LGBTQ community had a 29% effectiveness.   
 
 
 
