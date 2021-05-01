@@ -77,7 +77,7 @@ From what we can gather from the Chi Squared table the p value is 0.0006181 whic
 From the Fisher Exact test we can determined that the vaccine is about 60% effective while the 40% was ineffective.    
 
 $H_0$ The null hypothesis explains that the vaccine does not make a difference on infection rate if a male decides to take the vaccine.  
-$H_0$ The alternative hypothesis states that their is a difference in infection rate if a male decides to take the vaccine.   
+$H_0$ The alternative hypothesis states that their is a difference in infection rate if a male decides to take the vaccine.     
 
 # Females
 
